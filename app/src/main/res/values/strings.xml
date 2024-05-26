@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Omni</string>
+    <string name="north">N</string>
+    <string name="northeast">NE</string>
+    <string name="northwest">NW</string>
+    <string name="south">S</string>
+    <string name="southeast">SE</string>
+    <string name="southwest">SW</string>
+    <string name="west">W</string>
+    <string name="east">E</string>
+    <string name="direction_1" translatable="false">0</string>
+    <string name="direction_2" translatable="false">30</string>
+    <string name="direction_3" translatable="false">60</string>
+    <string name="direction_4" translatable="false">90</string>
+    <string name="direction_5" translatable="false">120</string>
+    <string name="direction_6" translatable="false">150</string>
+    <string name="direction_7" translatable="false">180</string>
+    <string name="direction_8" translatable="false">210</string>
+    <string name="direction_9" translatable="false">240</string>
+    <string name="direction_10" translatable="false">270</string>
+    <string name="direction_11" translatable="false">300</string>
+    <string name="direction_12" translatable="false">330</string>
+    <string name="degree_format" translatable="false">" %1$s°"</string>
+    <string name="longitude_desc">N</string>
+    <string name="latitude_desc">E</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Omni</string>
+    <string name="north">北</string>
+    <string name="northeast">东北</string>
+    <string name="south">南</string>
+    <string name="southeast">东南</string>
+    <string name="southwest">西南</string>
+    <string name="west">西</string>
+    <string name="east">东</string>
+    <string name="northwest">西北</string>
+</resources>
