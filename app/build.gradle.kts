@@ -9,6 +9,14 @@ android {
     namespace = "uk.akane.omni"
     compileSdk = 34
 
+    androidResources {
+        generateLocaleConfig = true
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "uk.akane.omni"
         minSdk = 26
@@ -70,6 +78,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.core.splashscreen)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

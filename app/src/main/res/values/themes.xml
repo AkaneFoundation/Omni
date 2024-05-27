@@ -1,10 +1,17 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Omni" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Omni" parent="Theme.Material3.DynamicColors.DayNight.NoActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="o_mr1">shortEdges</item>
         <item name="fontFamily">@font/hankengrotesk</item>
         <item name="android:fontFamily">@font/hankengrotesk</item>
         <item name="viewInflaterClass">uk.akane.omni.logic.ui.ViewCompatInflater</item>
+        <!-- Work around b/331383944: PreferenceFragmentCompat permanently mutates activity theme (enables vertical scrollbars) -->
+        <item name="android:scrollbars">none</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
 
+    <style name="PreV31.Theme.Omni" parent="Base.Theme.Omni">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -51,6 +58,35 @@
         <item name="colorSurfaceContainer">@color/md_theme_surfaceContainer</item>
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+    </style>
+
+    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text</item>
+        <item name="materialAlertDialogTitleIconStyle">@style/MaterialAlertDialog.App.Icon</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text.CenterStacked">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Body.Text" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Icon" parent="MaterialAlertDialog.Material3.Title.Icon.CenterStacked">
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textFontWeight">600</item>
     </style>
 
     <style name="CompassTextAppearance">
@@ -59,5 +95,25 @@
         <item name="android:textFontWeight">500</item>
     </style>
 
-    <style name="Theme.Omni" parent="Base.Theme.Omni" />
+    <style name="Base.Night.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.Omni</item>
+    </style>
+    <style name="Base.Day.Theme.Splash" parent="Base.Night.Theme.Splash">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
+    <style name="PreV31Day.Theme.Splash" parent="Base.Day.Theme.Splash">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_background</item>
+    </style>
+    <style name="PreV31Night.Theme.Splash" parent="Base.Night.Theme.Splash">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_background</item>
+    </style>
+
+    <style name="Day.Theme.Splash" parent="PreV31Day.Theme.Splash" />
+    <style name="Night.Theme.Splash" parent="PreV31Night.Theme.Splash" />
+
+    <style name="Theme.Omni" parent="PreV31.Theme.Omni" />
 </resources>

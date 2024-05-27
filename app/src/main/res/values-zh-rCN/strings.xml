@@ -9,4 +9,21 @@
     <string name="west">西</string>
     <string name="east">东</string>
     <string name="northwest">西北</string>
+    <string name="longitude_desc">北纬</string>
+    <string name="latitude_desc">东经</string>
+    <string name="unknown_location">未知地点</string>
+    <string name="perm_dialog_title">位置</string>
+    <string name="perm_dialog_text">Omni 需要用到您的位置信息来展示经纬度。这可能需要与您的位置提供商进行额外通讯。如果您选择“不”，您仍然可以使用 Omni 指南针 的基础功能。</string>
+    <string name="decline">不要</string>
+    <string name="accept">好的</string>
+    <string name="settings">设置</string>
+    <string name="settings_app_name">应用名称</string>
+    <string name="settings_author_name">作者</string>
+    <string name="version">版本</string>
+    <string name="settings_unknown_version">未知版本</string>
+    <string name="warning_dialog_title">警告</string>
+    <string name="warning_dialog_text">看起来您的设备没有可用的旋转向量传感器。 Omni 的指南针功能将被禁用。 但是，您仍然可以使用位置功能。</string>
+    <string name="dismiss">关闭</string>
+    <string name="delimiter">""</string>
+    <string name="location_format">%9$s%7$s%8$s%5$s%6$s%3$s%4$s%1$s%2$s</string>
 </resources>

@@ -23,4 +23,21 @@
     <string name="degree_format" translatable="false">" %1$s°"</string>
     <string name="longitude_desc">N</string>
     <string name="latitude_desc">E</string>
+    <string name="unknown_location">Unknown location</string>
+    <string name="perm_dialog_title">Location</string>
+    <string name="decline">No</string>
+    <string name="accept">Yes</string>
+    <string name="perm_dialog_text">Omni requires your location data in order to display latitude and longitude. That may requires communications with your location provider\'s server. If you select \"no\", you still can use the basic functionalities of omni compass.</string>
+    <string name="position_default_text" translatable="false">__.____°</string>
+    <string name="settings">Settings</string>
+    <string name="settings_app_name">App name</string>
+    <string name="author" translatable="false">123Duo3, AkaneTan</string>
+    <string name="settings_author_name">Author</string>
+    <string name="version">Version</string>
+    <string name="settings_unknown_version">Unknown version</string>
+    <string name="warning_dialog_title">Warning</string>
+    <string name="warning_dialog_text">It looks like your device doesn\'t have an available rotation vector sensor. The compass feature of Omni will be disabled. However, you still can use the location feature.</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="delimiter">,\ </string>
+    <string name="location_format">%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s%9$s</string>
 </resources>

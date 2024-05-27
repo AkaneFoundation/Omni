@@ -47,8 +47,7 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:textColor="?colorOnPrimary"
-        android:autoSizeTextType="uniform"
-        android:padding="20dp"
+        android:textSize="36sp"
         />
 
     <TextView
@@ -64,7 +63,7 @@
         android:lineSpacingExtra="0dp"
         android:background="@drawable/compass_bg"
         android:text="@string/north"
-        android:gravity="center"
+        android:gravity="center_vertical|center_horizontal"
         android:includeFontPadding="false"
         android:backgroundTint="?colorTertiary"
         android:textColor="?colorOnTertiary"

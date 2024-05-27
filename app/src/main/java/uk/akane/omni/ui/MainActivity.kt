@@ -1,24 +1,34 @@
 package uk.akane.omni.ui
 
-import android.content.Context
-import android.hardware.SensorManager
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import uk.akane.omni.R
+import uk.akane.omni.logic.enableEdgeToEdgeProperly
 
 class MainActivity : AppCompatActivity() {
 
-    private val sensorManager: SensorManager by lazy {
-        getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    }
+    private var ready: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen().setKeepOnScreenCondition { !ready }
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        enableEdgeToEdgeProperly()
         setContentView(R.layout.activity_main)
     }
 
-    fun fetchSensorManager(): SensorManager = sensorManager
+    fun postComplete() = run { ready = true }
+
+    fun isInflationStarted() = ready
+
+    fun startFragment(frag: Fragment, args: (Bundle.() -> Unit)? = null) {
+        supportFragmentManager.commit {
+            addToBackStack(System.currentTimeMillis().toString())
+            hide(supportFragmentManager.fragments.last())
+            replace(R.id.container, frag.apply { args?.let { arguments = Bundle().apply(it) } })
+        }
+    }
 
 }

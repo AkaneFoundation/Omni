@@ -1,0 +1,5 @@
+<resources>
+    <style name="Day.Theme.Splash" parent="Base.Day.Theme.Splash" />
+    <style name="Night.Theme.Splash" parent="Base.Night.Theme.Splash" />
+    <style name="Theme.Omni" parent="Base.Theme.Omni" />
+</resources>
