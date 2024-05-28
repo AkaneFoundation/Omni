@@ -12,10 +12,10 @@
         android:layout_height="52dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/compass_view"
+        app:layout_constraintBottom_toBottomOf="@id/text_indicator"
+        app:layout_constraintTop_toTopOf="@id/text_indicator"
         android:src="@drawable/location_indicator"
         app:tint="?colorPrimary"
-        android:layout_marginBottom="36dp"
         android:padding="7dp"
         />
 
@@ -23,12 +23,12 @@
         android:id="@+id/compass_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/settings_btn"
+        app:layout_constraintTop_toBottomOf="@id/location_indicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="1.15"
+        android:layout_marginTop="8dp"
         />
 
     <TextView
@@ -40,8 +40,8 @@
         android:textColor="?colorOnSurface"
         android:layout_marginStart="24dp"
         android:includeFontPadding="false"
-        app:layout_constraintTop_toTopOf="@id/location_indicator"
-        app:layout_constraintBottom_toBottomOf="@id/location_indicator"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         />
 
@@ -75,9 +75,10 @@
         android:insetLeft="0dp"
         android:insetRight="0dp"
         android:insetTop="0dp"
+        android:layout_marginBottom="8dp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/settings_btn"
+        app:layout_constraintStart_toStartOf="@id/settings_btn"
+        app:layout_constraintBottom_toTopOf="@id/settings_btn"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:icon="@drawable/ic_explorer"
@@ -86,7 +87,6 @@
         app:iconTint="?colorOnSurface"
         app:strokeWidth="1dp"
         app:strokeColor="?colorSurfaceContainer"
-        android:layout_marginEnd="24dp"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -103,8 +103,8 @@
         app:iconSize="40dp"
         app:backgroundTint="@android:color/transparent"
         app:iconTint="?colorOutline"
-        app:layout_constraintBottom_toBottomOf="@id/location_indicator"
-        app:layout_constraintTop_toTopOf="@id/location_indicator"
+        app:layout_constraintBottom_toBottomOf="@id/text_indicator"
+        app:layout_constraintTop_toTopOf="@id/text_indicator"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="24dp"
         />
@@ -181,15 +181,15 @@
         android:layout_height="wrap_content"
         tools:text="New York, US"
         android:textSize="22sp"
-        android:gravity="center"
+        android:gravity="center|end"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="?colorOnSurface"
         android:includeFontPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/compass_view"
-        app:layout_constraintBottom_toTopOf="@id/settings_btn"
+        app:layout_constraintStart_toEndOf="@id/compass_view"
+        app:layout_constraintBottom_toBottomOf="@id/settings_btn"
+        app:layout_constraintTop_toTopOf="@id/settings_btn"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

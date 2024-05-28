@@ -44,10 +44,11 @@
         app:layout_constraintWidth_percent="0.29"
         android:backgroundTint="?colorPrimary"
         tools:text=" 296°"
+        android:autoSizeMaxTextSize="40sp"
         android:gravity="center"
         android:includeFontPadding="false"
+        android:autoSizeTextType="uniform"
         android:textColor="?colorOnPrimary"
-        android:textSize="36sp"
         />
 
     <TextView
@@ -68,7 +69,7 @@
         android:backgroundTint="?colorTertiary"
         android:textColor="?colorOnTertiary"
         android:autoSizeTextType="uniform"
-        android:padding="11dp"
+        android:autoSizeMaxTextSize="32sp"
         />
 
     <TextView
@@ -87,7 +88,7 @@
         android:includeFontPadding="false"
         android:textColor="?colorOnPrimaryContainer"
         android:autoSizeTextType="uniform"
-        android:padding="11dp"
+        android:autoSizeMaxTextSize="32sp"
         />
 
     <TextView
@@ -106,7 +107,7 @@
         android:includeFontPadding="false"
         android:textColor="?colorOnPrimaryContainer"
         android:autoSizeTextType="uniform"
-        android:padding="11dp"
+        android:autoSizeMaxTextSize="32sp"
         />
 
     <TextView
@@ -125,7 +126,7 @@
         android:includeFontPadding="false"
         android:textColor="?colorOnPrimaryContainer"
         android:autoSizeTextType="uniform"
-        android:padding="11dp"
+        android:autoSizeMaxTextSize="32sp"
         />
 
     <androidx.constraintlayout.widget.Guideline

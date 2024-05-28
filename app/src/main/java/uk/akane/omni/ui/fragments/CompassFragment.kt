@@ -189,6 +189,8 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
 
         omniViewModel.lastKnownLocation.value?.let {
             updateLocationStatus(it)
+        }
+        if (requireContext().isLocationPermissionGranted) {
             showLongitudeLatitude(false)
         }
 
@@ -207,10 +209,6 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ViewCompat.setOnApplyWindowInsetsListener(view) { _, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-
-            sheetMaterialButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                bottomMargin = insets.bottom + resources.getDimensionPixelSize(R.dimen.sprt_btn_marginBottom)
-            }
 
             settingsMaterialButton.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 bottomMargin = insets.bottom + resources.getDimensionPixelSize(R.dimen.sprt_btn_marginBottom)

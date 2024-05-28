@@ -5,13 +5,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.Interpolator
 import android.hardware.SensorManager
 import androidx.core.graphics.Insets
-import android.os.Build
 import android.os.Looper
 import android.os.StrictMode
-import android.view.Display
 import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
