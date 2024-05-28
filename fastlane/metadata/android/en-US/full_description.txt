@@ -1,0 +1,1 @@
+<p><i>Omni</i> is a useful and handy minimalist toolbox. It comes with an up-to-date material 3 design and is light-weight, without any bloat or spyware.</p><p><br><b>Features:</b></p><ul><li>Compass with latitude & longitude</li><li>Gradienter (WIP)</li><li>Barometer (WIP)</li><li>Coin flipper (WIP)</li><li>Ruler (WIP)</li><li>Strength-adjustable flashlight (WIP)</li></ul>
