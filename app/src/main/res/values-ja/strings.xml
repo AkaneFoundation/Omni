@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="app_name">Omni</string>
   <string name="north">北</string>
@@ -9,19 +9,6 @@
   <string name="southwest">南西</string>
   <string name="west">西</string>
   <string name="east">東</string>
-  <string name="direction_1" translatable="false">0</string>
-  <string name="direction_2" translatable="false">30</string>
-  <string name="direction_3" translatable="false">60</string>
-  <string name="direction_4" translatable="false">90</string>
-  <string name="direction_5" translatable="false">120</string>
-  <string name="direction_6" translatable="false">150</string>
-  <string name="direction_7" translatable="false">180</string>
-  <string name="direction_8" translatable="false">210</string>
-  <string name="direction_9" translatable="false">240</string>
-  <string name="direction_10" translatable="false">270</string>
-  <string name="direction_11" translatable="false">300</string>
-  <string name="direction_12" translatable="false">330</string>
-  <string name="degree_format" translatable="false">" %1$s°"</string>
   <string name="longitude_desc">N</string>
   <string name="latitude_desc">E</string>
   <string name="unknown_location">不明な場所</string>
@@ -29,10 +16,8 @@
   <string name="decline">いいえ</string>
   <string name="accept">はい</string>
   <string name="perm_dialog_text">Omni は経緯経度を表示するために位置情報が必要です。そのため位置情報の提供サーバーとの通信が必要になる場合があります。｢いいえ｣を選択をしても Omni Compass の基本機能は使用できます。</string>
-  <string name="position_default_text" translatable="false">__.____°</string>
   <string name="settings">設定</string>
   <string name="settings_app_name">アプリ名</string>
-  <string name="author" translatable="false">123Duo3, AkaneTan</string>
   <string name="settings_author_name">作者</string>
   <string name="version">バージョン</string>
   <string name="settings_unknown_version">不明なバージョン</string>
