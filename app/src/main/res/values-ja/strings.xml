@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Omni</string>
+  <string name="north">北</string>
+  <string name="northeast">北東</string>
+  <string name="northwest">北西</string>
+  <string name="south">南</string>
+  <string name="southeast">南東</string>
+  <string name="southwest">南西</string>
+  <string name="west">西</string>
+  <string name="east">東</string>
+  <string name="longitude_desc">N</string>
+  <string name="latitude_desc">E</string>
+  <string name="unknown_location">不明な場所</string>
+  <string name="perm_dialog_title">場所</string>
+  <string name="decline">いいえ</string>
+  <string name="accept">はい</string>
+  <string name="perm_dialog_text">Omni は経緯経度を表示するために位置情報が必要です。そのため位置情報の提供サーバーとの通信が必要になる場合があります。｢いいえ｣を選択をしても Omni Compass の基本機能は使用できます。</string>
+  <string name="settings">設定</string>
+  <string name="settings_app_name">アプリ名</string>
+  <string name="settings_author_name">作者</string>
+  <string name="version">バージョン</string>
+  <string name="settings_unknown_version">不明なバージョン</string>
+  <string name="warning_dialog_title">警告</string>
+  <string name="warning_dialog_text">使用しているデバイスには利用可能な回転ベクトルセンサーが搭載されていないようです。Omni のコンパス機能は無効になります。ただし、位置情報の機能は使用可能です。</string>
+  <string name="dismiss">無視</string>
+  <string name="delimiter">,\ </string>
+  <string name="location_format">%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s%9$s</string>
+</resources>
