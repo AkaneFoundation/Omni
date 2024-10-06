@@ -7,11 +7,11 @@
 - Up-to-date material 3 design
 - Lightweight, no spyware or bloat
 - Compass with latitude & longitude
-- Gradienter (WIP)
+- Spirit Level
+- Ruler
+- Strength adjustable flashlight
 - Barometer (WIP)
 - Coin flipper (WIP)
-- Ruler (WIP)
-- Strength-adjustable flashlight (WIP)
 
 ## Installation
 You can download the latest stable version of the app from [GitHub releases](https://github.com/AkaneFoundation/Omni/releases/latest).
