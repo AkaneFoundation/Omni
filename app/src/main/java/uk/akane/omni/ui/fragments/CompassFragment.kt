@@ -1,6 +1,8 @@
 package uk.akane.omni.ui.fragments
 
 import android.Manifest
+import android.content.SharedPreferences
+import android.hardware.GeomagneticField
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -28,25 +30,29 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.coroutineScope
+import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uk.akane.omni.R
 import uk.akane.omni.logic.checkSensorAvailability
+import uk.akane.omni.logic.doIHavePermission
 import uk.akane.omni.logic.fadInAnimation
 import uk.akane.omni.logic.fadOutAnimation
 import uk.akane.omni.logic.isLocationPermissionGranted
 import uk.akane.omni.logic.setTextAnimation
 import uk.akane.omni.ui.MainActivity
 import uk.akane.omni.ui.components.CompassView
+import uk.akane.omni.ui.components.SwitchBottomSheet
 import uk.akane.omni.ui.fragments.settings.MainSettingsFragment
 import uk.akane.omni.ui.viewmodels.OmniViewModel
 import java.util.Locale
 import kotlin.math.abs
 
 
-class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
+class CompassFragment : BaseFragment(), SensorEventListener, LocationListener,
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val omniViewModel: OmniViewModel by activityViewModels()
 
@@ -56,8 +62,6 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     private var locationManager: LocationManager? = null
 
     private var rotationVectorSensor: Sensor? = null
-
-    private var lastDegree = 0f
 
     private lateinit var compassView: CompassView
     private lateinit var textIndicatorTextView: TextView
@@ -75,8 +79,13 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
 
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
+    private lateinit var prefs: SharedPreferences
+
     private var isAnimating: Boolean = false
     private var doNotHaveSensor: Boolean = false
+    private var hapticFeedback: Boolean = true
+    private var trueNorth: Boolean = false
+    private var useDms: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,8 +99,6 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
         if (!sensorManager!!.checkSensorAvailability(Sensor.TYPE_ROTATION_VECTOR)) {
             mainActivity!!.postComplete()
             doNotHaveSensor = true
-        } else {
-            sensorManager!!.registerListener(this, rotationVectorSensor, SensorManager.SENSOR_DELAY_FASTEST)
         }
 
         geocoder = Geocoder(requireContext(), Locale.getDefault())
@@ -104,14 +111,18 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
             registerForActivityResult(
                 ActivityResultContracts.RequestPermission()
             ) { isGranted: Boolean ->
-                if (isGranted) {
+                if (isGranted && requireContext().isLocationPermissionGranted) {
                     requestLocationUpdates()
                     showLongitudeLatitude()
                 }
             }
 
-        mutableListOf(1, 2, 3).sort()
+        prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        prefs.registerOnSharedPreferenceChangeListener(this)
 
+        hapticFeedback = prefs.getBoolean("haptic_feedback", true)
+        trueNorth = prefs.getBoolean("true_north", false)
+        useDms = prefs.getBoolean("coordinate", false)
     }
 
     private fun requestLocationUpdates() {
@@ -132,13 +143,44 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     }
 
     private fun updateLocationStatus(location: Location) {
-        latitudeTextView.text = String.format(Locale.getDefault(), "%.4f", location.latitude)
-        longitudeTextView.text = String.format(Locale.getDefault(), "%.4f", location.longitude)
+        if (!useDms) {
+            latitudeTextView.text = String.format(Locale.getDefault(), "%.4f", location.latitude)
+            longitudeTextView.text = String.format(Locale.getDefault(), "%.4f", location.longitude)
+        } else {
+            val listLatitudeDMS = Location.convert(location.latitude, Location.FORMAT_SECONDS).split(':')
+            val longitudeDMS = Location.convert(location.longitude, Location.FORMAT_SECONDS).split(':')
+            val regex = """[.,٫]\d+""".toRegex()
+            latitudeTextView.text = getString(
+                R.string.dms_format,
+                listLatitudeDMS[0],
+                listLatitudeDMS[1],
+                listLatitudeDMS[2].replace(regex, "")
+            )
+            longitudeTextView.text = getString(
+                R.string.dms_format,
+                longitudeDMS[0],
+                longitudeDMS[1],
+                longitudeDMS[2].replace(regex, "")
+            )
+        }
         updateCity(location)
     }
 
-    override fun onDestroy() {
+    override fun onResume() {
+        super.onResume()
+        if (sensorManager!!.checkSensorAvailability(Sensor.TYPE_ROTATION_VECTOR)) {
+            sensorManager!!.registerListener(this, rotationVectorSensor, SensorManager.SENSOR_DELAY_FASTEST)
+        }
+    }
+
+
+    override fun onPause() {
+        super.onPause()
         sensorManager!!.unregisterListener(this)
+    }
+
+    override fun onDestroy() {
+        prefs.unregisterOnSharedPreferenceChangeListener(this)
         super.onDestroy()
     }
 
@@ -149,16 +191,16 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_compass, container, false)
 
-        compassView = rootView.findViewById(R.id.compass_view)
-        textIndicatorTextView = rootView.findViewById(R.id.text_indicator)
-        sheetMaterialButton = rootView.findViewById(R.id.sheet_btn)
-        settingsMaterialButton = rootView.findViewById(R.id.settings_btn)
-        latitudeTextView = rootView.findViewById(R.id.latitude)
-        longitudeTextView = rootView.findViewById(R.id.longitude)
-        latitudeDescTextView = rootView.findViewById(R.id.latitude_desc)
-        longitudeDescTextView = rootView.findViewById(R.id.longitude_desc)
-        cityTextView = rootView.findViewById(R.id.city)
-        notActiveMaterialButton = rootView.findViewById(R.id.not_available_btn)
+        compassView = rootView.findViewById(R.id.compass_view)!!
+        textIndicatorTextView = rootView.findViewById(R.id.text_indicator)!!
+        sheetMaterialButton = rootView.findViewById(R.id.sheet_btn)!!
+        settingsMaterialButton = rootView.findViewById(R.id.settings_btn)!!
+        latitudeTextView = rootView.findViewById(R.id.latitude)!!
+        longitudeTextView = rootView.findViewById(R.id.longitude)!!
+        latitudeDescTextView = rootView.findViewById(R.id.latitude_desc)!!
+        longitudeDescTextView = rootView.findViewById(R.id.longitude_desc)!!
+        cityTextView = rootView.findViewById(R.id.city)!!
+        notActiveMaterialButton = rootView.findViewById(R.id.not_available_btn)!!
 
         directionStringList = listOf(
             getString(R.string.north),
@@ -187,6 +229,10 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
             mainActivity!!.startFragment(MainSettingsFragment())
         }
 
+        sheetMaterialButton.setOnClickListener {
+            SwitchBottomSheet(SwitchBottomSheet.CallFragmentType.COMPASS).show(parentFragmentManager, "switch_bottom_sheet")
+        }
+
         omniViewModel.lastKnownLocation.value?.let {
             updateLocationStatus(it)
         }
@@ -200,6 +246,27 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
                 .setMessage(resources.getString(R.string.warning_dialog_text))
                 .setIcon(R.drawable.ic_warning)
                 .setPositiveButton(resources.getString(R.string.dismiss), null)
+                .show()
+        }
+
+        if (omniViewModel.lastDegree.value != null) {
+            updateCompassViewWithAzimuth(omniViewModel.lastDegree.value!!)
+        }
+
+        if (!requireContext().doIHavePermission(Manifest.permission.POST_NOTIFICATIONS) &&
+            !prefs.getBoolean("isPostNotificationPromptShown" , false) &&
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(resources.getString(R.string.compass_prompt_title))
+                .setMessage(resources.getString(R.string.compass_prompt_desc))
+                .setIcon(R.drawable.ic_notifications)
+                .setNegativeButton(resources.getString(R.string.decline)) { _, _ ->
+                    prefs.edit().putBoolean("isPostNotificationPromptShown", true).apply()
+                }
+                .setPositiveButton(resources.getString(R.string.accept)) { _, _ ->
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    prefs.edit().putBoolean("isPostNotificationPromptShown", true).apply()
+                }
                 .show()
         }
 
@@ -248,9 +315,24 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
         val azimuthInDegrees = Math.toDegrees(azimuthInRadians.toDouble()).toFloat()
 
         val adjustedAzimuth = if (azimuthInDegrees < 0) 360f + azimuthInDegrees else azimuthInDegrees
-        if (lastDegree == 0f) lastDegree = adjustedAzimuth
+        if (omniViewModel.lastDegree.value == null) omniViewModel.setLastDegree(adjustedAzimuth)
 
-        updateCompassViewWithAzimuth(adjustedAzimuth)
+        if (trueNorth && omniViewModel.lastKnownLocation.value != null) {
+            val magneticDeclination = getMagneticDeclination(omniViewModel.lastKnownLocation.value!!)
+            val trueAzimuth = adjustedAzimuth.plus(magneticDeclination)
+            updateCompassViewWithAzimuth(trueAzimuth)
+        } else {
+            updateCompassViewWithAzimuth(adjustedAzimuth)
+        }
+    }
+
+    private fun getMagneticDeclination(location: Location): Float {
+        val latitude = location.latitude.toFloat()
+        val longitude = location.longitude.toFloat()
+        val altitude = location.altitude.toFloat()
+        val time = location.time
+        val geomagneticField = GeomagneticField(latitude, longitude, altitude, time)
+        return geomagneticField.declination
     }
 
     private fun remapRotationMatrix(rotationMatrix: FloatArray, displayRotation: Int?): FloatArray {
@@ -269,7 +351,9 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     private fun updateCompassViewWithAzimuth(azimuthInDegrees: Float) {
         compassView.rotate(-azimuthInDegrees)
         updateTextIndicatorWithAzimuth(azimuthInDegrees)
-        checkAndVibrate(azimuthInDegrees)
+        if (hapticFeedback) {
+            checkAndVibrate(azimuthInDegrees)
+        }
     }
 
     private fun updateTextIndicatorWithAzimuth(degree: Float) {
@@ -279,9 +363,10 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     private fun checkAndVibrate(degree: Float) {
         val threshold = 2f
 
-        if (abs(degree - lastDegree) > threshold) {
+        if (omniViewModel.lastDegree.value != null &&
+            abs(degree - omniViewModel.lastDegree.value!!) > threshold) {
             view?.performHapticFeedback(HapticFeedbackConstants.CLOCK_TICK)
-            lastDegree = degree
+            omniViewModel.setLastDegree(degree)
         }
     }
 
@@ -392,6 +477,20 @@ class CompassFragment : BaseFragment(), SensorEventListener, LocationListener {
     companion object {
         val ENTER_INTERPOLATOR = PathInterpolator(0f, 0f, 0f, 1f)
         val EXIT_INTERPOLATOR = PathInterpolator(0.3f, 0f, 1f, 1f)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        when (key) {
+            "haptic_feedback" -> {
+                hapticFeedback = prefs.getBoolean("haptic_feedback", true)
+            }
+            "true_north" -> {
+                trueNorth = prefs.getBoolean("true_north", false)
+            }
+            "coordinate" -> {
+                useDms = prefs.getBoolean("coordinate", false)
+            }
+        }
     }
 
 }

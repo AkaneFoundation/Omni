@@ -21,13 +21,14 @@
     <string name="direction_11" translatable="false">300</string>
     <string name="direction_12" translatable="false">330</string>
     <string name="degree_format" translatable="false">" %1$s°"</string>
+    <string name="degree_format_tile" translatable="false">"%1$s°"</string>
     <string name="longitude_desc">N</string>
     <string name="latitude_desc">E</string>
     <string name="unknown_location">Unknown location</string>
     <string name="perm_dialog_title">Location</string>
     <string name="decline">No</string>
     <string name="accept">Yes</string>
-    <string name="perm_dialog_text">Omni requires your location data in order to display latitude and longitude. That may requires communications with your location provider\'s server. If you select \"no\", you still can use the basic functionalities of omni compass.</string>
+    <string name="perm_dialog_text">Toolbox requires your location data in order to display latitude and longitude. That may requires communications with your location provider\'s server. If you select \"no\", you still can use the basic functionalities of compass.</string>
     <string name="position_default_text" translatable="false">__.____°</string>
     <string name="settings">Settings</string>
     <string name="settings_app_name">App name</string>
@@ -36,8 +37,37 @@
     <string name="version">Version</string>
     <string name="settings_unknown_version">Unknown version</string>
     <string name="warning_dialog_title">Warning</string>
-    <string name="warning_dialog_text">It looks like your device doesn\'t have an available rotation vector sensor. The compass feature of Omni will be disabled. However, you still can use the location feature.</string>
+    <string name="warning_dialog_text">It looks like your device doesn\'t have an available rotation vector sensor. The compass feature of toolbox will be disabled. However, you still can use the location feature.</string>
     <string name="dismiss">Dismiss</string>
     <string name="delimiter">,\ </string>
     <string name="location_format">%1$s%2$s%3$s%4$s%5$s%6$s%7$s%8$s%9$s</string>
+    <string name="not_supported">Not supported!</string>
+    <string name="compass">Compass</string>
+    <string name="compass_tile_notification_channel">Compass Notification</string>
+    <string name="compass_notification_title">Compass running</string>
+    <string name="compass_notification_label">Long click to disable this notification</string>
+    <string name="about">About</string>
+    <string name="settings_coordinate_format">Coordinate format</string>
+    <string name="settings_coordinate_format_desc">Degree, minute, second (DMS)</string>
+    <string name="settings_compass_directions">Compass directions</string>
+    <string name="settings_compass_directions_desc">Intercardinal directions</string>
+    <string name="settings_true_north">Use true north</string>
+    <string name="universal">Universal</string>
+    <string name="settings_haptic_feedback">Haptic feedback</string>
+    <string name="cm" translatable="false">cm</string>
+    <string name="in" translatable="false">in</string>
+    <string name="flashlight_warn">Higher brightness may cause burns</string>
+    <string name="dms_format" translatable="false">%1$s° %2$s\' %3$s\'\'</string>
+    <string name="compass_prompt_title">Notification</string>
+    <string name="compass_prompt_desc">Toolbox requires notification permission in order to post notification for the compass QS tile to survive. If you select no, compass QS tile may not work as expected.</string>
+    <string name="shortcut_short_label_compass">Compass</string>
+    <string name="shortcut_long_label_compass">Compass</string>
+    <string name="shortcut_short_label_spirit_level">Spirit level</string>
+    <string name="shortcut_long_label_spirit_level">Spirit level</string>
+    <string name="shortcut_short_label_ruler">Ruler</string>
+    <string name="shortcut_long_label_ruler">Ruler</string>
+    <string name="shortcut_short_label_flashlight">Flashlight</string>
+    <string name="shortcut_long_label_flashlight">Flashlight</string>
+    <string name="flashlight_dialog_title">Warning</string>
+    <string name="flashlight_dialog_text">Increasing the flashlight brightness to 90% or higher may cause irreversible damage to the flashlight\'s light-emitting components. If you still want to proceed, press "Yes".</string>
 </resources>

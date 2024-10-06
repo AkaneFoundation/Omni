@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?colorSurfaceContainer">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:icon="@drawable/ic_settings"
+        app:iconSize="24dp"
+        app:backgroundTint="?colorSurface"
+        app:iconTint="?colorOnSurface"
+        app:strokeWidth="1dp"
+        app:strokeColor="?colorSurfaceContainer"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="@dimen/sprt_btn_marginBottom"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sheet_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/settings_btn"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:icon="@drawable/ic_flashlight_on"
+        app:iconSize="24dp"
+        app:backgroundTint="?colorSurface"
+        app:iconTint="?colorOnSurface"
+        app:strokeWidth="1dp"
+        app:strokeColor="?colorSurfaceContainer"
+        android:layout_marginEnd="24dp"
+        />
+
+    <TextView
+        android:id="@+id/warn_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flashlight_warn"
+        android:textSize="22sp"
+        android:textColor="?colorOutline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sheet_btn"
+        android:layout_marginBottom="64dp"
+        />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/flashlight_slider"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Slider.Legacy"
+        android:rotation="270"
+        app:trackHeight="224dp"
+        app:thumbRadius="112dp"
+        app:labelBehavior="gone"
+        app:thumbElevation="0dp"
+        app:trackColorInactive="?colorSurfaceContainerLow"
+        app:trackColorActive="?colorPrimary"
+        app:thumbColor="?colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/warn_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.hardware.SensorManager
 import androidx.core.graphics.Insets
-import android.os.Looper
-import android.os.StrictMode
 import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -20,7 +18,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import uk.akane.omni.BuildConfig
 
 @Suppress("NOTHING_TO_INLINE")
 inline fun Context.doIHavePermission(perm: String) =
@@ -106,21 +103,6 @@ fun SensorManager.checkSensorAvailability(sensorType: Int): Boolean {
 	return getDefaultSensor(sensorType) != null
 }
 
-// the whole point of this function is to do literally nothing at all (but without impacting
-// performance) in release builds and ignore StrictMode violations in debug builds
-inline fun <reified T> allowDiskAccessInStrictMode(doIt: () -> T): T {
-	return if (BuildConfig.DEBUG) {
-		if (Looper.getMainLooper() != Looper.myLooper()) throw IllegalStateException()
-		val policy = StrictMode.allowThreadDiskReads()
-		try {
-			StrictMode.allowThreadDiskWrites()
-			doIt()
-		} finally {
-			StrictMode.setThreadPolicy(policy)
-		}
-	} else doIt()
-}
-
 fun View.enableEdgeToEdgePaddingListener(ime: Boolean = false, top: Boolean = false,
 										 extra: ((Insets) -> Unit)? = null) {
 	if (fitsSystemWindows) throw IllegalArgumentException("must have fitsSystemWindows disabled")
@@ -187,3 +169,7 @@ fun View.enableEdgeToEdgePaddingListener(ime: Boolean = false, top: Boolean = fa
 @Suppress("NOTHING_TO_INLINE")
 inline fun Int.dpToPx(context: Context): Int =
 	(this.toFloat() * context.resources.displayMetrics.density).toInt()
+
+@Suppress("NOTHING_TO_INLINE")
+inline fun Float.dpToPx(context: Context): Float =
+	(this * context.resources.displayMetrics.density)

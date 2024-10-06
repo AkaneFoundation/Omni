@@ -6,6 +6,7 @@
         <item name="fontFamily">@font/hankengrotesk</item>
         <item name="android:fontFamily">@font/hankengrotesk</item>
         <item name="viewInflaterClass">uk.akane.omni.logic.ui.ViewCompatInflater</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.App.BottomSheetDialog</item>
         <!-- Work around b/331383944: PreferenceFragmentCompat permanently mutates activity theme (enables vertical scrollbars) -->
         <item name="android:scrollbars">none</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
@@ -86,7 +87,7 @@
     </style>
 
     <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
-        <item name="android:textFontWeight">600</item>
+        <item name="android:textFontWeight">500</item>
     </style>
 
     <style name="CompassTextAppearance">
@@ -110,6 +111,12 @@
     <style name="PreV31Night.Theme.Splash" parent="Base.Night.Theme.Splash">
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_background</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="enableEdgeToEdge">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?colorSurfaceContainer</item>
     </style>
 
     <style name="Day.Theme.Splash" parent="PreV31Day.Theme.Splash" />

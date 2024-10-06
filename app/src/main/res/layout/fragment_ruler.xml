@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?colorSurfaceContainer">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:icon="@drawable/ic_settings"
+        app:iconSize="24dp"
+        app:backgroundTint="?colorSurface"
+        app:iconTint="?colorOnSurface"
+        app:strokeWidth="1dp"
+        app:strokeColor="?colorSurfaceContainer"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="@dimen/sprt_btn_marginBottom"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sheet_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:insetBottom="0dp"
+        android:insetLeft="0dp"
+        android:insetRight="0dp"
+        android:insetTop="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/settings_btn"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:icon="@drawable/ic_ruler"
+        app:iconSize="24dp"
+        app:backgroundTint="?colorSurface"
+        app:iconTint="?colorOnSurface"
+        app:strokeWidth="1dp"
+        app:strokeColor="?colorSurfaceContainer"
+        android:layout_marginEnd="24dp"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_layout_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sheet_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:paddingBottom="20dp"
+        android:background="@drawable/ruler_right">
+
+        <uk.akane.omni.ui.components.RulerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/card_layout_2"
+        app:layout_constraintBottom_toBottomOf="@id/card_layout_2"
+        android:paddingBottom="20dp"
+        android:background="@drawable/ruler_left">
+
+        <uk.akane.omni.ui.components.RulerViewInch
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cm_ind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?materialCardViewFilledStyle"
+        app:cardBackgroundColor="?colorPrimaryContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/in_ind">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cm"
+                android:textSize="22sp"
+                android:textColor="?colorOnPrimaryContainer"
+                android:includeFontPadding="false"
+                android:layout_marginStart="12dp"
+                />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:rotation="180"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="6dp"
+                app:tint="?colorOnPrimaryContainer"
+                />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/in_ind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?materialCardViewFilledStyle"
+        app:cardBackgroundColor="?colorTertiaryContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cm_ind">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_back"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="10dp"
+                app:tint="?colorOnTertiaryContainer"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/in"
+                android:textSize="22sp"
+                android:textColor="?colorOnTertiaryContainer"
+                android:includeFontPadding="false"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="12dp"
+                />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

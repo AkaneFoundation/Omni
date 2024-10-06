@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="compass"
+        android:enabled="true"
+        android:icon="@drawable/ic_explorer"
+        android:shortcutShortLabel="@string/shortcut_short_label_compass"
+        android:shortcutLongLabel="@string/shortcut_long_label_compass">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="uk.akane.omni"
+            android:targetClass="uk.akane.omni.ui.MainActivity">
+            <extra
+                android:name="targetFragment"
+                android:value="0" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="spiritlevel"
+        android:enabled="true"
+        android:icon="@drawable/ic_straighten"
+        android:shortcutShortLabel="@string/shortcut_short_label_spirit_level"
+        android:shortcutLongLabel="@string/shortcut_long_label_spirit_level">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="uk.akane.omni"
+            android:targetClass="uk.akane.omni.ui.MainActivity">
+            <extra
+                android:name="targetFragment"
+                android:value="1" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="ruler"
+        android:enabled="true"
+        android:icon="@drawable/ic_ruler"
+        android:shortcutShortLabel="@string/shortcut_short_label_ruler"
+        android:shortcutLongLabel="@string/shortcut_long_label_ruler">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="uk.akane.omni"
+            android:targetClass="uk.akane.omni.ui.MainActivity">
+            <extra
+                android:name="targetFragment"
+                android:value="2" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="flashlight"
+        android:enabled="true"
+        android:icon="@drawable/ic_flashlight_on"
+        android:shortcutShortLabel="@string/shortcut_short_label_flashlight"
+        android:shortcutLongLabel="@string/shortcut_long_label_flashlight">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="uk.akane.omni"
+            android:targetClass="uk.akane.omni.ui.MainActivity">
+            <extra
+                android:name="targetFragment"
+                android:value="3" />
+        </intent>
+    </shortcut>
+</shortcuts>

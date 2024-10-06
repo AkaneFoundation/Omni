@@ -10,8 +10,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.color.MaterialColors
 import uk.akane.omni.R
-import uk.akane.omni.logic.allowDiskAccessInStrictMode
-import uk.akane.omni.logic.dpToPx
 import uk.akane.omni.logic.enableEdgeToEdgePaddingListener
 
 /**
@@ -26,15 +24,8 @@ abstract class BasePreferenceFragment : PreferenceFragmentCompat(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.setBackgroundColor(MaterialColors.getColor(view, android.R.attr.colorBackground))
-        view.findViewById<RecyclerView>(androidx.preference.R.id.recycler_view).apply {
-            setPadding(paddingLeft, paddingTop + 12.dpToPx(context), paddingRight, paddingBottom)
-            enableEdgeToEdgePaddingListener()
-        }
-    }
-
-    override fun setPreferencesFromResource(preferencesResId: Int, key: String?) {
-        allowDiskAccessInStrictMode { super.setPreferencesFromResource(preferencesResId, key) }
+        view.setBackgroundColor(MaterialColors.getColor(view, com.google.android.material.R.attr.colorSurfaceContainer))
+        view.findViewById<RecyclerView>(androidx.preference.R.id.recycler_view)!!.enableEdgeToEdgePaddingListener()
     }
 
     override fun setDivider(divider: Drawable?) {

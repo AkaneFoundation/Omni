@@ -19,12 +19,10 @@ abstract class BaseSettingFragment(private val str: Int,
 		savedInstanceState: Bundle?,
 	): View? {
 		val rootView = inflater.inflate(R.layout.fragment_top_settings, container, false)
-		val topAppBar = rootView.findViewById<MaterialToolbar>(R.id.topAppBar)
-		val collapsingToolbar =
-			rootView.findViewById<CollapsingToolbarLayout>(R.id.collapsingtoolbar)
+		val topAppBar = rootView.findViewById<MaterialToolbar>(R.id.topAppBar)!!
 
-		rootView.findViewById<AppBarLayout>(R.id.appbarlayout).enableEdgeToEdgePaddingListener()
-		collapsingToolbar.title = getString(str)
+		rootView.findViewById<AppBarLayout>(R.id.appbarlayout)!!.enableEdgeToEdgePaddingListener()
+		topAppBar.title = getString(str)
 
 		topAppBar.setNavigationOnClickListener {
 			requireActivity().supportFragmentManager.popBackStack()
